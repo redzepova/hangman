@@ -4,4 +4,8 @@ module Display
         1 - Start Game    2 - Load Game"
     end
 
+    def round_instructions()
+        puts "Guess a letter, or type SAVE to save your game."
+    end
+
 end

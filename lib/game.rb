@@ -10,7 +10,8 @@ class Game
 
     def initialize ()
         new_game()
-        @solution = Database.new.random_word.split(//)
+        @game_data = Database.new
+        @solution = @game_data.random_word.split(//)
         puts "#{@solution}"
     end
 
@@ -30,6 +31,18 @@ class Game
         #Correct guesses, all guesses, the solution, and number of turns
     end
 
-    def generate_solution
+    def make_guess()
+        guess = gets.chomp
+        @all_guesses << guess
+    end
+
+    def play_round()
+        do until @correct_guesses == @solution or @turns == 0
+            game_instructions(round)
+            make_guess()
+            #add guess to guess array
+            #compare guess to solution
+            #minus 1 from turns
+        end
     end
 end
