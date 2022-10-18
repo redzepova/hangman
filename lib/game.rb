@@ -10,8 +10,8 @@ class Game
 
     def initialize ()
         new_game()
-        @solution = Database.new.random_word
-        puts @solution
+        @solution = Database.new.random_word.split(//)
+        puts "#{@solution}"
     end
 
     def select_game_type()

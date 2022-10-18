@@ -10,7 +10,7 @@ class Database
     file = File.open('dictionary.txt')
     until file.eof?
       line = file.readline
-      @dictionary << line if line.length > 5 && line.length < 10
+      @dictionary << line.chomp if line.length > 5 && line.length < 10
     end
   end
 
