@@ -55,6 +55,14 @@ class Game
     end
   end 
 
+  def won_game
+    puts won_game_answer
+  end
+
+  def game_over
+    puts lost_game_answer
+  end
+
   def play
     until @correct_guesses == @solution || @bad_guesses.length == 3
         display_guesses("SECRET WORD", @correct_guesses)
@@ -63,5 +71,7 @@ class Game
         @guess = player_input(player_turn, /[a-z]|[save]/)
         compare_to_solution if @guess.length == 1
     end
+
+    @correct_guesses == @solution ? won_game : game_over
   end
 end

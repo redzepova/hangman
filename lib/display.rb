@@ -21,4 +21,34 @@ module Display
     puts "#{title}: #{array.join(" ").to_s}"
   end
 
+  def won_game_answer
+    <<~HEREDOC
+
+    CONGRATULATIONS! You win! 
+
+    The winning word was #{@solution.join("").to_s}
+
+    You got the answer with only #{bad_guesses.length} incorrect guesses.
+
+    Would you like to play again?
+
+    1 - YES  2 - NO
+
+    HEREDOC
+ end
+
+ def lost_game_answer
+    <<~HEREDOC
+
+    Too bad. Better luck next time.
+
+    The winnig word was #{@solution.join("").to_s}
+
+    Would you like to play again?
+
+    1 - YES  2 - NO
+
+    HEREDOC
+ end
+
 end
