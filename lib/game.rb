@@ -60,10 +60,14 @@ class Game
 
   def won_game
     puts won_game_answer
+    play_game = player_input(play_again, /[12]/)
+    Game.new if play_game == '1'
   end
 
   def game_over
     puts lost_game_answer
+    play_game = player_input(play_again, /[12]/)
+    Game.new if play_game == '1'
   end
 
   def play

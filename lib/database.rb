@@ -2,6 +2,7 @@
 
 module Database
   require_relative 'display'
+  require 'json'
 
   include Display
 

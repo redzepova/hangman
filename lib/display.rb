@@ -31,10 +31,6 @@ module Display
 
       You got the answer with only #{bad_guesses.length} incorrect guesses.
 
-      Would you like to play again?
-
-      1 - YES  2 - NO
-
     HEREDOC
   end
 
@@ -45,9 +41,15 @@ module Display
 
       The winnig word was #{@solution.join('')}
 
-      Would you like to play again?
+    HEREDOC
+  end
 
-      1 - YES  2 - NO
+  def play_again
+    <<~HEREDOC
+
+    Would you like to play again?
+
+    1 - Yes   2 - No
 
     HEREDOC
   end
