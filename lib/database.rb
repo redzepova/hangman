@@ -1,17 +1,18 @@
 # frozen_string_literal: true
+
 module Database
-  require_relative "display.rb"
+  require_relative 'display'
 
   include Display
 
   def find_valid_words
-    arr = Array.new
+    arr = []
     file = File.open('dictionary.txt')
     until file.eof?
       line = file.readline
       arr << line.chomp if line.length > 5 && line.length < 10
     end
-    return arr
+    arr
   end
 
   def choose_word
