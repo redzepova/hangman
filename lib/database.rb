@@ -1,31 +1,23 @@
 # frozen_string_literal: true
+module Database
+  require_relative "display.rb"
 
-class Database
-    attr_accessor :dictionary
-    def initialize
-        @dictionary = Array.new
-        find_valid_words
-    end
-  def find_valid_words()
+  include Display
+
+  def find_valid_words
+    arr = Array.new
     file = File.open('dictionary.txt')
     until file.eof?
       line = file.readline
-      @dictionary << line.chomp if line.length > 5 && line.length < 10
+      arr << line.chomp if line.length > 5 && line.length < 10
     end
+    arr
   end
 
-  def random_word()
-    @dictionary.sample
+  def choose_word
+    words = find_valid_words
+    words.sample
   end
 
-  def game_info_to_json()
+  def game_info_to_json
   end
-
-  def validate_response (type, response)
-    case type
-    when "guess"
-      if response =~ /[^a-z]
-        
-
-
-end
