@@ -17,4 +17,15 @@ class Database
   def random_word()
     @dictionary.sample
   end
+
+  def game_info_to_json()
+  end
+
+  def validate_response (type, response)
+    case type
+    when "guess"
+      if response =~ /[^a-z]
+        
+
+
 end

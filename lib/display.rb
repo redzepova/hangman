@@ -4,8 +4,21 @@ module Display
         1 - Start Game    2 - Load Game"
     end
 
-    def round_instructions()
-        puts "Guess a letter, or type SAVE to save your game."
+    def game_instructions(type)
+        case type
+        when "round"
+            "Make your guess by typing a letter and pressing enter. Type SAVE to save."
+        when "save"
+            "Type a name to save your game"
+        when "load"
+            "Type a name and press enter to load your game"
+        else
+            "Error. Please check your entry and try again."
+        end
+    end
+
+    def display_guesses(array)
+        puts "#{array.join(" ")}"
     end
 
 end
