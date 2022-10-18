@@ -8,11 +8,12 @@ class Game
   include Display
   include Database
 
-  attr_accessor :all_guesses, :correct_guesses, :solution, :turns, :score, :dictionary
+  attr_accessor :bad_guesses, :correct_guesses, :solution, :guess
 
   def initialize
     new_game
-    @solution = choose_word
+    puts @solution.to_s
+    play
   end
 
   def select_game_type
@@ -20,42 +21,47 @@ class Game
   end
 
   def new_game
-    @correct_guesses = []
     @bad_guesses = []
-    @solution = []
-    @turns = 3
-  end
-
-  def save_game
-    # pull up info saved as JSON
-    # Correct guesses, all guesses, the solution, and number of turns
-  end
-
-  def make_guess(data)
-    guess = gets.chomp
-    valid_guess = data.validate_response('alphabet', guess)
-    while valid_guess == false
-      puts game_instructions('round')
-      guess = gets.chomp
-      valid_guess = data.validate_response('alphabet', guess)
-    end
-    guess
+    @solution = choose_word.split(//)
+    @correct_guesses = []
+    correct_guess_display
   end
 
   def player_input(prompt, regex)
     puts prompt
-    input = gets.chomp
-    if input.match?(regex) ? return? print bad_input
+    input = gets.chomp.downcase
+
+    until input.match?(regex) do 
+        puts bad_input
+        input = gets.chomp.downcase
+    end
+
+    return input
   end
 
+  def correct_guess_display
+    @solution.each do 
+        @correct_guesses << "_"
+    end
+  end
+
+  def compare_to_solution
+    if @solution.any?(@guess)
+        solution.each_with_index do |letter, index|
+            @guess == letter ? @correct_guesses[index] = letter : next
+        end
+    else
+        @bad_guesses << @guess
+    end
+  end 
 
   def play
-    until @correct_guesses == @solution.split("") || @bad_guesses.length == 3
-      puts game_instructions('round')
-      guess = make_guess
-      # add guess to guess array
-      # compare guess to solution
-      # minus 1 from turns
+    until @correct_guesses == @solution || @bad_guesses.length == 3
+        display_guesses("SECRET WORD", @correct_guesses)
+        display_guesses("INCORRECT GUESSES", @bad_guesses)
+
+        @guess = player_input(player_turn, /[a-z]|[save]/)
+        compare_to_solution if @guess.length == 1
     end
   end
 end

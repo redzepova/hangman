@@ -17,7 +17,8 @@ module Display
     "You already guessed that letter."
   end
 
-  def display_guesses(array)
-    puts array.join(' ').to_s
+  def display_guesses(title, array)
+    puts "#{title}: #{array.join(" ").to_s}"
   end
+
 end

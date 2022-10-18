@@ -11,13 +11,11 @@ module Database
       line = file.readline
       arr << line.chomp if line.length > 5 && line.length < 10
     end
-    arr
+    return arr
   end
 
   def choose_word
     words = find_valid_words
     words.sample
   end
-
-  def game_info_to_json
-  end
+end
