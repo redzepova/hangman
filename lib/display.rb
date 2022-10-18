@@ -10,7 +10,7 @@ module Display
   end
 
   def bad_input
-    "That's not a valid entry. Try again."
+    "Guesses must be a letter you have not yet tried. Guess again."
   end
 
   def repeated_guess

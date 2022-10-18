@@ -24,6 +24,7 @@ class Game
     @bad_guesses = []
     @solution = choose_word.split(//)
     @correct_guesses = []
+    @all_guesses = []
     correct_guess_display
   end
 
@@ -31,7 +32,7 @@ class Game
     puts prompt
     input = gets.chomp.downcase
 
-    until input.match?(regex) do 
+    until input.match?(regex) && @all_guesses.any?(input) == false do 
         puts bad_input
         input = gets.chomp.downcase
     end
@@ -53,6 +54,8 @@ class Game
     else
         @bad_guesses << @guess
     end
+
+    @all_guesses << @guess
   end 
 
   def won_game
@@ -68,7 +71,7 @@ class Game
         display_guesses("SECRET WORD", @correct_guesses)
         display_guesses("INCORRECT GUESSES", @bad_guesses)
 
-        @guess = player_input(player_turn, /[a-z]|[save]/)
+        @guess = player_input(player_turn, /[a-z]|[save]|[@correct_guesses]/)
         compare_to_solution if @guess.length == 1
     end
 
