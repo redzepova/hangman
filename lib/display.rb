@@ -25,13 +25,22 @@ module Display
   def player_turn
     <<~HEREDOC
 
-      Guess a letter. You can also type 'save' to save your game, or 'exit' to exit.
+      Guess a letter. You can also type 'save' to save your game, or 'exit' to exit. If you think you know
+      the secret word, type 'solve' to solve. This will use up all your remaining chances.
 
     HEREDOC
   end
 
   def bad_input
     'Input error. Try again.'
+  end
+
+  def solve_message
+    <<~HEREDOC
+
+    Type your best guess. \e[1;31mThis will use all your remaining chances\e[0;37m - so think carefully!
+
+    HEREDOC
   end
 
   def repeated_guess
@@ -71,7 +80,7 @@ module Display
       You lost. Better luck next time.
 
       The winning word was \e[4;36m#{@solution.join('')}\e[0;37m
-      
+
     HEREDOC
   end
 

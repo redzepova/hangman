@@ -76,8 +76,6 @@ class Game
 
   def game_quit
     puts thankyou
-
-
     exit
   end
 
@@ -87,13 +85,22 @@ class Game
     game_quit if continue == '2'
   end
 
+  def solve
+    @guess = player_input(solve_message, /[a-z]/)
+
+    @guess.split('') == @solution ? won_game : game_over
+
+    play_again?
+  end
+
   def play
     until @correct_guesses == @solution || @bad_guesses.length == 10
       puts display_guesses('SECRET WORD', @correct_guesses)
       puts display_guesses('INCORRECT GUESSES', @bad_guesses)
 
-      @guess = player_input(player_turn, /[a-z]|[save]|[@correct_guesses]|[exit]/)
+      @guess = player_input(player_turn, /[a-z]|[save]|[@correct_guesses]|[exit]|[solve]/)
       save if @guess == 'save'
+      solve if @guess == 'solve'
       game_quit if @guess == 'exit'
       compare_to_solution if @guess.length == 1
     end
