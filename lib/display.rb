@@ -2,16 +2,24 @@
 
 module Display
   def select_game_type_display
-    puts "Would you like to start a new game, or load a saved game? \n
-        1 - Start Game    2 - Load Game"
+    <<~HEREDOC
+      Would you like to start a new game, or load a saved game?
+      #{'   '}
+      1 - Start Game    2 - Load Game
+
+    HEREDOC
   end
 
   def player_turn
-    'Choose a letter.'
+    <<~HEREDOC
+
+      Guess a letter. You can also type 'save' to save your game.
+
+    HEREDOC
   end
 
   def bad_input
-    'Guesses must be a letter you have not yet tried. Guess again.'
+    'Input error. Try again.'
   end
 
   def repeated_guess
@@ -34,6 +42,14 @@ module Display
     HEREDOC
   end
 
+  def display_filenames(num, name)
+    <<~HEREDOC
+
+      ##{num} ---  #{name}#{'   '}
+
+    HEREDOC
+  end
+
   def lost_game_answer
     <<~HEREDOC
 
@@ -47,9 +63,39 @@ module Display
   def play_again
     <<~HEREDOC
 
-    Would you like to play again?
+      Would you like to play again?
 
-    1 - Yes   2 - No
+      1 - Yes   2 - No
+
+    HEREDOC
+  end
+
+  def save_game_name
+    'What would you like to name your game?'
+  end
+
+  def game_saved(name)
+    "Your game was saved as #{name}"
+  end
+
+  def keep_playing?
+    <<~HEREDOC
+
+      Would you like to keep playing?#{' '}
+
+      1 - Yes  2 - No
+
+    HEREDOC
+  end
+
+  def which_game?
+    'Select a saved game to play.'
+  end
+
+  def thankyou
+    <<~HEREDOC
+
+      Thanks for playing Hangman!
 
     HEREDOC
   end
