@@ -1,8 +1,20 @@
 # frozen_string_literal: true
 
 module Display
+  def game_overview
+    <<~HEREDOC
+
+    \e[1;93mWelcome to Hangman!
+
+    \e[0;37mThe computer will randomly select a letter between 5-12 letters long, and your mission is to guess that word. You are
+    allowed to miss up to 10 guesses.
+
+    HEREDOC
+  end
   def select_game_type_display
     <<~HEREDOC
+
+
       Would you like to start a new game, or load a saved game?
       #{'   '}
       1 - Start Game    2 - Load Game
@@ -13,7 +25,7 @@ module Display
   def player_turn
     <<~HEREDOC
 
-      Guess a letter. You can also type 'save' to save your game.
+      Guess a letter. You can also type 'save' to save your game, or 'exit' to exit.
 
     HEREDOC
   end
@@ -27,17 +39,20 @@ module Display
   end
 
   def display_guesses(title, array)
-    puts "#{title}: #{array.join(' ')}"
+    <<~HEREDOC
+
+    \e[1;93m#{title}:\e[0;37m  #{array.join(' ')}
+    HEREDOC
   end
 
   def won_game_answer
     <<~HEREDOC
 
-      CONGRATULATIONS! You win!#{' '}
+    \e[1;93mCONGRATULATIONS! You win!
 
-      The winning word was #{@solution.join('')}
+    \e[0;37mThe winning word was \e[4;36m#{@solution.join('')}
 
-      You got the answer with only #{bad_guesses.length} incorrect guesses.
+    \e[0;37mYou got the answer with only \e[4;36m#{bad_guesses.length} incorrect guesses.\e[0;37m
 
     HEREDOC
   end
@@ -53,10 +68,10 @@ module Display
   def lost_game_answer
     <<~HEREDOC
 
-      Too bad. Better luck next time.
+      You lost. Better luck next time.
 
-      The winnig word was #{@solution.join('')}
-
+      The winning word was \e[4;36m#{@solution.join('')}\e[0;37m
+      
     HEREDOC
   end
 

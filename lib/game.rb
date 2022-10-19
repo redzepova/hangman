@@ -11,8 +11,10 @@ class Game
   attr_accessor :bad_guesses, :correct_guesses, :solution, :guess
 
   def initialize
+    puts game_overview
     select_game_type
     play
+    play_again?
   end
 
   def select_game_type
@@ -25,11 +27,11 @@ class Game
     @solution = choose_word.split(//)
     @correct_guesses = []
     @all_guesses = []
-    @save_game = ''
+    @save_game = ""
     correct_guess_display
   end
 
-  def player_input(prompt, regex = /\w/)
+  def player_input(prompt, regex = /[\w]/)
     puts prompt
     input = gets.chomp.downcase
 
@@ -75,7 +77,7 @@ class Game
   def game_quit
     puts thankyou
 
-    File.delete("output/#{@saved_game}") if File.exist?("output/#{@saved_game}")
+
     exit
   end
 
@@ -87,8 +89,8 @@ class Game
 
   def play
     until @correct_guesses == @solution || @bad_guesses.length == 10
-      display_guesses('SECRET WORD', @correct_guesses)
-      display_guesses('INCORRECT GUESSES', @bad_guesses)
+      puts display_guesses('SECRET WORD', @correct_guesses)
+      puts display_guesses('INCORRECT GUESSES', @bad_guesses)
 
       @guess = player_input(player_turn, /[a-z]|[save]|[@correct_guesses]|[exit]/)
       save if @guess == 'save'
