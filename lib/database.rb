@@ -6,12 +6,12 @@ module Database
 
   include Display
 
-  def find_valid_words
+  def find_valid_words(min, max, optional = /\w+/)
     arr = []
     file = File.open('dictionary.txt')
     until file.eof?
       line = file.readline
-      arr << line.chomp if line.length > 5 && line.length < 10
+      arr << line.chomp if line.length > min && line.length < max && line.match?(optional)
     end
     arr
   end
@@ -26,7 +26,8 @@ module Database
       'solution' => @solution,
       'correct_guesses' => @correct_guesses,
       'bad_guesses' => @bad_guesses,
-      'all_guesses' => @all_guesses
+      'all_guesses' => @all_guesses,
+      'difficulty' => @difficulty
     )
   end
 
@@ -66,6 +67,7 @@ module Database
     @correct_guesses = file['correct_guesses']
     @bad_guesses = file['bad_guesses']
     @all_guesses = file['all_guesses']
+    @difficulty = file['difficulty']
   end
 
   def load_game

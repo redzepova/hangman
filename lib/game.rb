@@ -8,7 +8,7 @@ class Game
   include Display
   include Database
 
-  attr_accessor :bad_guesses, :correct_guesses, :solution, :guess
+  attr_accessor :bad_guesses, :correct_guesses, :solution, :guess, :@difficulty
 
   def initialize
     puts game_overview
@@ -29,6 +29,10 @@ class Game
     @all_guesses = []
     @save_game = ""
     correct_guess_display
+  end
+
+  def select_game_difficulty
+    #prompt user to select difficulty level. Explain choices.
   end
 
   def player_input(prompt, regex = /[\w]/)
@@ -93,8 +97,8 @@ class Game
     play_again?
   end
 
-  def play
-    until @correct_guesses == @solution || @bad_guesses.length == 10
+  def play (difficulty)
+    until @correct_guesses == @solution || @bad_guesses.length == difficulty
       puts display_guesses('SECRET WORD', @correct_guesses)
       puts display_guesses('INCORRECT GUESSES', @bad_guesses)
 

@@ -116,6 +116,20 @@ module Display
     'Select a saved game to play.'
   end
 
+  def game_difficulty_choices
+    <<~HEREDOC
+
+    Select your difficulty level:
+
+    1 - Easy. Words are between 5-8 letters. You can miss 5 letters.
+    2 - Medium. Words are between 7-9 letters. You can miss 5 letters.
+    3 - Hard. Words are between 8-11 letters. You can miss 5 letters.
+    4 - Very hard. Words are between 10-12 letters. You can miss 4 letters.
+    5 - RSTLNE. Words are between 8-12 letters. You cannot use RSTLNE for any single letter guesses.
+    6 - Wierd. Words are 8-12 letters long. The computer forces you to guess after 6 turns.
+
+    HEREDOC
+  end
   def thankyou
     <<~HEREDOC
 
